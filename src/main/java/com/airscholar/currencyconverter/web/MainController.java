@@ -19,8 +19,8 @@ import com.airscholar.currencyconverter.web.dto.UserRegistrationDTO;
 public class MainController {
 
 	static RestTemplate restTemplate = new RestTemplate();
-	private String EXCHANGE_URL = "https://openexchangerates.org/api/latest.json?app_id=";
-	private String CURRENCIES_URL = "https://openexchangerates.org/api/currencies.json?app_id=";
+	private String EXCHANGE_URL = "https://openexchangerates.org/api/latest.json?app_id=3d78ba2081cf43f297af796dfb1bab35";
+	private String CURRENCIES_URL = "https://openexchangerates.org/api/currencies.json?app_id=3d78ba2081cf43f297af796dfb1bab35";
 
 
 	@GetMapping("/login")
@@ -33,7 +33,6 @@ public class MainController {
 
 		// Object data = restTemplate.getForObject(EXCHANGE_URL, Object.class);  
 		Object currencies = restTemplate.getForObject(CURRENCIES_URL, Object.class);
-		
 		model.addAttribute("currencies", currencies);
 //		
 		return "index";
