@@ -14,6 +14,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "user", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
@@ -23,11 +25,20 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	
 	@Column(name = "first_name")
+	@NotBlank(message = "First name is mandatory")
 	private String firstName;
+	
 	@Column(name = "last_name")
+	@NotBlank(message = "Last name is mandatory")
 	private String lastName;
+	
+	@NotBlank(message = "Email is mandatory")
+	@Email(message = "Please enter a valid e-mail address")
 	private String email;
+	
+	@NotBlank(message = "Password is mandatory")
 	private String password;
 
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)

@@ -12,8 +12,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.airscholar.currencyconverter.model.User;
 import com.airscholar.currencyconverter.model.Role;
+import com.airscholar.currencyconverter.model.User;
 import com.airscholar.currencyconverter.repository.UserRepository;
 import com.airscholar.currencyconverter.service.UserService;
 import com.airscholar.currencyconverter.web.dto.UserRegistrationDTO;
@@ -21,10 +21,9 @@ import com.airscholar.currencyconverter.web.dto.UserRegistrationDTO;
 @Service
 public class UserServiceImpl implements UserService {
 
-	
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
-	
+
 	private UserRepository userRepository;
 
 	public UserServiceImpl(UserRepository userRepository) {
@@ -34,24 +33,26 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User save(UserRegistrationDTO registrationDTO) {
-		
-		User user = new User(registrationDTO.getFirstName(),registrationDTO.getLastName(), registrationDTO.getEmail(), passwordEncoder.encode(registrationDTO.getPassword()), Arrays.asList(new Role("ROLE_USER")));
-		
+
+		User user = new User(registrationDTO.getFirstName(), registrationDTO.getLastName(), registrationDTO.getEmail(),
+				passwordEncoder.encode(registrationDTO.getPassword()), Arrays.asList(new Role("ROLE_USER")));
+
 		return userRepository.save(user);
 	}
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		User user = userRepository.findByEmail(username);
-		
-		if(user == null) {
+
+		if (user == null) {
 			throw new UsernameNotFoundException("Invalid Username or Password");
 		}
-		
-		return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), mapRolesToAuthorities(user.getRoles()));
+
+		return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(),
+				mapRolesToAuthorities(user.getRoles()));
 	}
 
-	private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles){
+	private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles) {
 		return roles.stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
 	}
 }

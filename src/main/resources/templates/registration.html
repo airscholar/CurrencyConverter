@@ -35,6 +35,10 @@
 				<div th:if="${param.success}">
 					<div class="alert alert-info">Registration successful! Please login</div>
 				</div>
+				<!-- failure message -->
+				<div th:if="${param.failure}">
+					<div class="alert alert-danger">Registration failed! Please correct the errors and try again. </div>
+				</div>
 
 				<h1>Registration</h1>
 
