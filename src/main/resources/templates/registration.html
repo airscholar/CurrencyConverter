@@ -60,6 +60,34 @@
 					</div>
 
 					<div class="form-group">
+						<label class="control-label" for="dateOfBirth"> Date of Birth </label> 
+						<input type="date" id="date"
+							class="form-control" th:field="*{dateOfBirth}" required autofocus="autofocus" />
+					</div>
+
+					<div class="form-group">
+						<label class="control-label" for="postalAddress"> Postal Address </label> <input
+							id="postalAddress" class="form-control" th:field="*{postalAddress}" required
+							autofocus="autofocus" />
+					</div>
+
+					<div class="form-group">
+						<label class="control-label" for="country"> Country </label>
+						<select class="form-control" id="country" name="country" th:field="*{country}">
+							<option value="">Select Country</option>
+							<option value="AF">Afghanistan</option>
+						</select>
+
+					</div>
+
+					<div class="form-group">
+						<label class="control-label" for="city"> City </label>
+						<select class="form-control" id="city" name="city" th:field="*{city}">
+							<option value="">Select City</option>
+						</select>
+					</div>
+
+					<div class="form-group">
 						<label class="control-label" for="password"> Password </label> <input id="password"
 							class="form-control" type="password" th:field="*{password}" required
 							autofocus="autofocus" />

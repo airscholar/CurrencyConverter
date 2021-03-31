@@ -1,6 +1,7 @@
 package com.airscholar.currencyconverter.model;
 
 import java.util.Collection;
+import java.util.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -25,19 +26,25 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	
 	@Column(name = "first_name")
 	@NotBlank(message = "First name is mandatory")
 	private String firstName;
-	
+
 	@Column(name = "last_name")
 	@NotBlank(message = "Last name is mandatory")
 	private String lastName;
-	
+
 	@NotBlank(message = "Email is mandatory")
 	@Email(message = "Please enter a valid e-mail address")
 	private String email;
-	
+	private Date dateOfBirth;
+	@NotBlank(message = "Postal Address is mandatory")
+	private String postalAddress;
+//	@NotBlank(message = "Country is mandatory")
+	private String country;
+//	@NotBlank(message = "City is mandatory")
+	private String city;
+
 	@NotBlank(message = "Password is mandatory")
 	private String password;
 
@@ -49,11 +56,16 @@ public class User {
 
 	}
 
-	public User(String firstName, String lastName, String email, String password, Collection<Role> roles) {
+	public User(String firstName, String lastName, String email, Date dateOfBirth, String postalAddress, String country,
+			String city, String password, Collection<Role> roles) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
+		this.dateOfBirth = dateOfBirth;
+		this.postalAddress = postalAddress;
+		this.country = country;
+		this.city = city;
 		this.password = password;
 		this.roles = roles;
 	}
@@ -104,6 +116,38 @@ public class User {
 
 	public void setRoles(Collection<Role> roles) {
 		this.roles = roles;
+	}
+
+	public Date getDateOfBirth() {
+		return dateOfBirth;
+	}
+
+	public void setDateOfBirth(Date dateOfBirth) {
+		this.dateOfBirth = dateOfBirth;
+	}
+
+	public String getPostalAddress() {
+		return postalAddress;
+	}
+
+	public void setPostalAddress(String postalAddress) {
+		this.postalAddress = postalAddress;
+	}
+
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
 	}
 
 }
